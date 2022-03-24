@@ -83,11 +83,11 @@ def imDisplay(filename: str, representation: int):
     img_array = imReadAndConvert(filename, representation)
     if representation == 1:  # If representation is grayscale
         plt.imshow(img_array, cmap="gray")
-        plt.show()# show the image
+        plt.show()  # show the image
 
     elif representation == 2:  # If representation is RGB
         plt.imshow(img_array)
-        plt.show()# show the image
+        plt.show()  # show the image
 
 
 def transformRGB2YIQ(imgRGB: np.ndarray) -> np.ndarray:
@@ -96,16 +96,29 @@ def transformRGB2YIQ(imgRGB: np.ndarray) -> np.ndarray:
     :param imgRGB: An Image in RGB
     :return: A YIQ in image color space
     """
-    pass
 
+    constant_mat = [[0.299, 0.587, 0.114], [0.596, -0.275, -0.321], [0.212, -0.523, 0.311]]#define the constant mat with constant values
+    Ans_mat = np.zeros_like(imgRGB.astype(float)) # create new np.array of zeroes
+
+    shape = imgRGB.shape[0]
+    for val in range(shape):#move over all pixels in image
+        Ans_mat[val, ...] = np.matmul(imgRGB[val, ...], constant_mat)
+    return Ans_mat
 
 def transformYIQ2RGB(imgYIQ: np.ndarray) -> np.ndarray:
     """
-    Converts an YIQ image to RGB color space
-    :param imgYIQ: An Image in YIQ
-    :return: A RGB in image color space
+    Converts an RGB image to YIQ color space
+    :param imgRGB: An Image in RGB
+    :return: A YIQ in image color space
     """
-    pass
+
+    constant_mat = [[1, 0.956, 0.619], [1, -0.272, -0.647], [1, -1.106, 1.703]]#define the constant mat with constant values
+    Ans_mat = np.zeros_like(imgYIQ.astype(float)) # create new np.array of zeroes
+
+    shape = imgYIQ.shape[0]
+    for val in range(shape):#move over all pixels in image
+        Ans_mat[val, ...] = np.matmul(imgYIQ[val, ...], constant_mat)
+    return Ans_mat
 
 
 def hsitogramEqualize(imgOrig: np.ndarray) -> (np.ndarray, np.ndarray, np.ndarray):
