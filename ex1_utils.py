@@ -9,8 +9,11 @@
         ........::..:::::..:::......::
 """
 from typing import List
-
 import numpy as np
+import cv2  # library of Python bindings designed to solve computer vision problems.
+from matplotlib import pyplot as plt
+from sklearn.preprocessing import normalize
+
 LOAD_GRAY_SCALE = 1
 LOAD_RGB = 2
 
@@ -20,7 +23,7 @@ def myID() -> np.int:
     Return my ID (not the friend's ID I copied from)
     :return: int
     """
-    return 123456789
+    return 318916335
 
 
 def imReadAndConvert(filename: str, representation: int) -> np.ndarray:
@@ -30,7 +33,44 @@ def imReadAndConvert(filename: str, representation: int) -> np.ndarray:
     :param representation: GRAY_SCALE or RGB
     :return: The image object
     """
-    pass
+
+    img_file_path = filename  # 'C:/Users/yuval/trainCatVSDogs/train/dog.10071.jpg' #r'C:\Users\yuval\queen.png'
+
+    if representation == 1:  # If representation is grayscale
+    # Using cv2.cvtColor() method
+    # Using cv2.COLOR_BGR2GRAY color space
+    # conversion code
+        src = cv2.imread(img_file_path)  # Create the numpy array of the image
+        img_array = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+        normed_matrix = normalize(img_array) #normlize
+
+
+    elif representation == 2:  # If representation is RGB
+        img_array = cv2.imread(img_file_path,1)#Create the numpy array of the image.
+        img_array = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
+
+        img_a = img_array[:, :, 0]
+        img_b = img_array[:, :, 1]
+        img_c = img_array[:, :, 2]  # Extracting single channels from 3 channel image
+        # The above code could also be replaced with cv2.split(img) << which will return 3 numpy arrays (using opencv)
+        # normalizing per channel data(means we will normlize each diemention separately):
+        img_a = (img_a - np.min(img_a)) / (np.max(img_a) - np.min(img_a))
+        img_b = (img_b - np.min(img_b)) / (np.max(img_b) - np.min(img_b))
+        img_c = (img_c - np.min(img_c)) / (np.max(img_c) - np.min(img_c))
+
+        # putting the 3 channels back together:
+        img_norm = np.empty(img_array.shape, dtype=np.float32) #create new empty np.array
+        img_norm[:, :, 0] = img_a
+        img_norm[:, :, 1] = img_b
+        img_norm[:, :, 2] = img_c
+        normed_matrix=img_norm
+
+
+#By using below links:
+#https://stackoverflow.com/questions/42460217/how-to-normalize-a-4d-numpy-array
+#https://stackoverflow.com/questions/42460217/how-to-normalize-a-4d-numpy-array
+
+    return normed_matrix
 
 
 def imDisplay(filename: str, representation: int):
@@ -40,7 +80,14 @@ def imDisplay(filename: str, representation: int):
     :param representation: GRAY_SCALE or RGB
     :return: None
     """
-    pass
+    img_array = imReadAndConvert(filename, representation)
+    if representation == 1:  # If representation is grayscale
+        plt.imshow(img_array, cmap="gray")
+        plt.show()# show the image
+
+    elif representation == 2:  # If representation is RGB
+        plt.imshow(img_array)
+        plt.show()# show the image
 
 
 def transformRGB2YIQ(imgRGB: np.ndarray) -> np.ndarray:
