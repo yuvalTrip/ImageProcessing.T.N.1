@@ -127,7 +127,14 @@ def hsitogramEqualize(imgOrig: np.ndarray) -> (np.ndarray, np.ndarray, np.ndarra
         :param imgOrig: Original Histogram
         :ret
     """
-    pass
+    hist, bins = np.histogram(img.flatten(), 256, [0, 256])
+    cdf = hist.cumsum()
+    cdf_normalized = cdf * float(hist.max()) / cdf.max()
+    plt.plot(cdf_normalized, color='b')
+    plt.hist(img.flatten(), 256, [0, 256], color='r')
+    plt.xlim([0, 256])
+    plt.legend(('cdf', 'histogram'), loc='upper left')
+    plt.show()
 
 
 def quantizeImage(imOrig: np.ndarray, nQuant: int, nIter: int) -> (List[np.ndarray], List[float]):
