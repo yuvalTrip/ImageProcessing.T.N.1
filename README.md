@@ -2,15 +2,6 @@
 
 The system used to run the task was Windows 10 PC, using PyCharm on python 3.8.
 
-The files appeared are:
-* Readme.md 
-* *.jpg, *.png - all test images used
-* ex1_main - the main class provided us
-* ex1_utils - the functions that have been implemented as requested
-* gamma.py - the gamma correction function was implemented
-* gitignore - files to be ignored by the github, irrelevant to project
-* Ex1.pdf - The pdf file of the assignment
-
 The functions implemented in the assignment:
 
 * myID() - defines my ID number
@@ -28,3 +19,13 @@ The functions implemented in the assignment:
 * fix_q- Calculate new q using wighted average on the histogram
 * convertToImg- Executing the quantization to the original image 
 * gammaDisplay() - GUI for gamma correction
+
+The files attached:
+
+* Readme.md 
+* *.jpg, *.png - all test images used
+* ex1_main - the main class provided us
+* ex1_utils - the functions that have been implemented as requested
+* gamma.py - the gamma correction function was implemented
+* gitignore - files to be ignored by the github, irrelevant to project
+* Ex1.pdf - The pdf file of the assignment
