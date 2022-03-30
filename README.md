@@ -23,9 +23,8 @@ The functions implemented in the assignment:
 The files attached:
 
 * Readme.md 
-* *.jpg, *.png - all test images used
+* *.jpg, *.png - all images used
 * ex1_main - the main class provided us
 * ex1_utils - the functions that have been implemented as requested
 * gamma.py - the gamma correction function was implemented
-* gitignore - files to be ignored by the github, irrelevant to project
 * Ex1.pdf - The pdf file of the assignment
