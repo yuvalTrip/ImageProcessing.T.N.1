@@ -10,7 +10,7 @@ The files appeared are:
 * gamma.py - the gamma correction function was implemented
 * gitignore - files to be ignored by the github, irrelevant to project
 * Ex1.pdf - The pdf file of the assignment
-* 
+
 The functions implemented in the assignment:
 
 * myID() - defines my ID number

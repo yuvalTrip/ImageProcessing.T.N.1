@@ -241,7 +241,7 @@ def quantizeImage(imOrig: np.ndarray, nQuant: int, nIter: int) -> (List[np.ndarr
     else:# If this is GrayScale (2D)
         imY = imOrig
     histOrig = np.histogram(imY.flatten(), bins=256)[0] # Original Histogram
-    Z, Q = findBestCenters(histOrig, nQuant, nIter)
+    Z, Q = Find_BestCenters(histOrig, nQuant, nIter)
     imHistory = [imOrig.copy()]
     E = []
     for i in range(len(Z)):
@@ -251,7 +251,7 @@ def quantizeImage(imOrig: np.ndarray, nQuant: int, nIter: int) -> (List[np.ndarr
         E.append(e)
     return imHistory, E
 
-def findBestCenters(histOrig: np.ndarray, nQuant: int, nIter: int) -> (np.ndarray, np.ndarray):
+def Find_BestCenters(histOrig: np.ndarray, nQuant: int, nIter: int) -> (np.ndarray, np.ndarray):
     """
             function find the best nQuant centers for quantize the image in nIter steps given us, *or* when the error is minimum
             :param histOrig: hist of the original image
